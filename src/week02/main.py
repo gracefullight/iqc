@@ -336,8 +336,8 @@ def quiz_answers(ket_0: sp.Matrix, ket_1: sp.Matrix, theta) -> None:
     print("Q5: False - unitary 행렬만 양자 게이트로 유효")
     print("Q6: True - X 게이트는 |0⟩ ↔ |1⟩ 교환")
     print("Q7: True - 측정 시 상태가 기준 상태로 붕괴")
-    print("Q8: True - unitary 행렬은 벡터의 규범을 보존")
-    print("Q9: False - P(0) = cos²(θ/2), not cos²(θ)")
+    print("Q8: True - unitary 행렬은 벡터의 norm을 보존")
+    print("Q9: False - P(|0⟩) = cos²(θ/2), not cos²(θ)")
 
     state_10 = sp.Matrix([sp.Rational(1, 2), sp.sqrt(3) / 2])
     norm_10 = sp.simplify(state_10.H * state_10)[0]
