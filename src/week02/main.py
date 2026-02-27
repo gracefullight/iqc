@@ -164,9 +164,7 @@ def cell_11_complex_magnitude_left(inner_product_psi_phi: sp.Matrix) -> sp.Expr:
     return leftside
 
 
-def cell_12_complex_magnitude_right(
-    inner_product_phi_psi: sp.Matrix, leftside: sp.Expr
-) -> None:
+def cell_12_complex_magnitude_right(inner_product_phi_psi: sp.Matrix, leftside: sp.Expr) -> None:
     """코드 셀 12: 복소수 크기 (오른쪽)."""
     rightside = sp.sqrt(sp.simplify(inner_product_phi_psi * inner_product_phi_psi.H))
     rightside = rightside.expand(complex=True)
@@ -202,9 +200,7 @@ def cell_14_outer_product(ket_0: sp.Matrix, ket_1: sp.Matrix) -> None:
     pprint(outer_product_1_0)
 
 
-def cell_15_qubit_normalization(
-    ket_0: sp.Matrix, ket_1: sp.Matrix
-) -> tuple:
+def cell_15_qubit_normalization(ket_0: sp.Matrix, ket_1: sp.Matrix) -> tuple:
     """코드 셀 15: 큐비트 상태와 정규화."""
     theta, phi = sp.symbols("theta phi", real=True)
 
@@ -333,14 +329,14 @@ def quiz_answers(ket_0: sp.Matrix, ket_1: sp.Matrix, theta) -> None:
     print("Quiz 정답 확인")
     print("=" * 60)
 
-    print("Q1: |α|² + |β|² = 1 ✓ (양자 상태의 정규화 조건)")
-    print("Q2: False - α와 β가 모두 0이 아니면 확률적 결과")
-    print("Q3: False - 전역 위상 e^(iγ)는 측정 확률에 영향 없음")
-    print("Q4: False - Bloch 구멋의 표면상의 점만 가능 (단위 벡터)")
-    print("Q5: False - 유니타리 행렬만 양자 게이트로 유효")
+    print("Q1: True - |α|² + |β|² = 1 (양자 상태의 정규화 조건)")
+    print("Q2: False - α와 β가 모두 0이 아니면 확률적으로 같은 결과")
+    print("Q3: False - 전역 위상 e^(iγ)는 측정 확률에 영향을 준다")
+    print("Q4: False - Bloch 구의 표면상의 점만 가능 (단위 벡터)")
+    print("Q5: False - unitary 행렬만 양자 게이트로 유효")
     print("Q6: True - X 게이트는 |0⟩ ↔ |1⟩ 교환")
     print("Q7: True - 측정 시 상태가 기준 상태로 붕괴")
-    print("Q8: True - 유니타리 행렬은 벡터의 규범을 보존")
+    print("Q8: True - unitary 행렬은 벡터의 규범을 보존")
     print("Q9: False - P(0) = cos²(θ/2), not cos²(θ)")
 
     state_10 = sp.Matrix([sp.Rational(1, 2), sp.sqrt(3) / 2])
@@ -381,7 +377,7 @@ def main() -> None:
     cell_6_conjugate_transpose(ket_psi, A)
     cell_7_hermitian(A)
     cell_8_rotation_matrix(I)
-    inner_product = cell_9_inner_product(ket_psi, ket_phi)
+    cell_9_inner_product(ket_psi, ket_phi)
     inner_product_psi_phi, inner_product_phi_psi = cell_10_inner_product_order(ket_psi, ket_phi)
     leftside = cell_11_complex_magnitude_left(inner_product_psi_phi)
     cell_12_complex_magnitude_right(inner_product_phi_psi, leftside)
