@@ -41,10 +41,20 @@ def superdense_coding_cirq(a1: int, a2: int, quokka_host: str = "quokka1") -> tu
     json_obj = json.loads(response.content)
 
     measured: list[int] | None = None
-    if "result" in json_obj and "m_received" in json_obj["result"]:
-        measured = json_obj["result"]["m_received"][0]
-    elif "result" in json_obj and "c" in json_obj["result"]:
-        measured = json_obj["result"]["c"][0]
+    if "result" in json_obj and isinstance(json_obj["result"], dict):
+        result_obj = json_obj["result"]
+
+        if "m_received" in result_obj:
+            measured = result_obj["m_received"][0]
+        elif "m_m_received" in result_obj:
+            measured = result_obj["m_m_received"][0]
+        elif "c" in result_obj:
+            measured = result_obj["c"][0]
+        else:
+            for key, value in result_obj.items():
+                if key.startswith("m") and isinstance(value, list) and value:
+                    measured = value[0]
+                    break
 
     if measured is None or len(measured) < MIN_RECEIVED_BITS:
         message = f"Unexpected Quokka response: {json_obj}"
